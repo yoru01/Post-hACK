@@ -22,7 +22,7 @@ This workshop is for a project that was created during the Decentralized Umoja3 
   
 We assume that you'll go through this workshop in a directory named `~/reach/price-the-right-casino-edition`
   
-Using the below terminal command, we will be creating and accessing a new directory  
+Using the below terminal command, we will be creating and accessing a new directory.  
 ```bash
 $ mkdir -p ~/reach/price-the-right-casino-edition && cd ~/reach/price-the-right-casino-edition
 ```
@@ -36,18 +36,18 @@ Once that is done, to confirm that reach has been installed successfully, we wil
 ```bash 
 $ ../reach version
 ```
-The output of that command should diplay the latest reach version.  
+The output of that command should display the latest Reach version.  
 
 Next, we initialize our reach application using the following command 
   
 ```bash
 ./reach init
 ```
-This creates an `index.mjs` which is the test interface and an `index.rsh` file which is the smart contract, also known as the Reach file.  
+This creates an `index.mjs`, which is the test interface, and an `index.rsh` file, which is the smart contract, also known as the Reach file.  
   
 # Problem Analysis 
   
-As a developer, before you start writing any line of code to perform any function, we'll have to ask ourselves some questions and produce our answers, then write down an algorithm of how we want that application to work and how it solves the problems listed then and only then, we can start writing our first lines of code.  
+As a developer, before we start writing any line of code to perform any function, we'll have to ask ourselves some questions and produce our answers, then write down an algorithm for how we want that application to work and how it solves the problems listed. Then we can start writing our first lines of code. 
   
 For this Dapp we have to ask ourselves the following questions:
   
@@ -60,34 +60,34 @@ For this Dapp we have to ask ourselves the following questions:
 ```
 3. How are the funds being moved?
 ```
-Please sit tight and enjoy, the questions above will be answered as workshop continues.  
+Please sit tight and enjoy yourself. The questions above will be answered as the workshop continues.  
   
 # Application Logic  
-We would start by answering the very first question which concerns the logic of our application.
+We would start by answering the very first question, which concerns the logic of our application.
 The logic goes like this:
 ```
-Step 1 - The House aka Deployer sets the game parameters  which are the deadline, the wager, the range of the random numbers and the number of trials the players are allowed to have then the Deployer deploys the contract.
+Step 1 - The House aka Deployer sets the game parameters which are the deadline, the wager, the range of the random numbers, and the number of trials the players are allowed to have, then the Deployer deploys the contract.
 ```
 ```
-Step 2 - The two players Alice and Bob then attach to the contract using the contract info given by the House.
+Step 2 - The two players, Alice and Bob, then attach to the contract using the contract info given by the House.
 ```
 ```
 Step 3 - The two players are prompted to accept the wager and the rules of the game before the game commences.
 ```
 ```
-Step 4 - Once they have both accepted the wager and the rules of the game they are allowed to start the game with Alice having to guess the random number in a given range of numbers then bob is allowed to do the same.
+Step 4 - Once they have both accepted the wager and the rules of the game, they are allowed to start the game with Alice having to guess the random number in a given range of numbers, then bob is allowed to do the same.
 ```
 ```
-Step 5 - The game continues until either of the players have guessed the right number or they have both exceeded the number of trials set by the house.  
+Step 5 - The game continues until either of the players has guessed the right number or they have both exceeded the number of trials set by the house.  
 ```
 ```
-Step 6 - If Alice only guesses the right number before the trials are exceeded she wins the game and gets both her wager and Bob's  wager, if Bob only guesses the right number before the trials are exceeded he wins the game and gets both his  wager and Alice's wager, if they  both guess the right number before the trials are exceeded they get refunded and if none of them get the right guess and their trials have been exceeded they both lose their wagers to the house and are prompted to play again if they want to.  
+Step 6 - If Alice only guesses the right number before the trials are exceeded, she wins the game and gets both her wager and Bob's wager. If Bob only guesses the right number before the trials are exceeded, he wins the game and gets both his wager and Alice's wager. If they both guess the right number before the trials are exceeded, they get refunded, and if none of them get the right guess and their trials have been exceeded, they both lose their wagers to the house and are prompted to play again if they want to.    
 ```
-If you have been following up, I belive everything is clear at this point and we have answered our first question.  
+If you have been following up, I believe everything is clear at this point and we have answered our first question.   
   
 # Logic Implementation  
   
-Now that we have an algorithm of how our application is meant to work and the logic it has to process to give our desired outcome we can start writing our first lines of code.  
+Now that we have an algorithm of how our application is meant to work and the logic it has to process to give our desired outcome, we can start writing our first lines of code.  
   
 If you open the directory on your editor most preferably VS CODE we would see 3 files in it which are `index.mjs`, `index.rsh` and `reach`.  
   
@@ -167,7 +167,7 @@ const winner = (rand,hand1, hand2) => {
 
 };
 ```
-Next, we would be creating another function(`payWinner`) that is in charge of disbursting the wagers according to the outcome of the game.  
+Next, we would be creating another function(payWinner) that is in charge of disbursing the wagers according to the outcome of the game.  
   
 ```js
 // Makes the required payment to the winner
@@ -192,11 +192,11 @@ const payWinner = (outcome, wager, Alice, Bob, House) => {
   }
 }
 ```
-Next, we define the players abilities:
+Next, we define the players' abilities:
 - `seeRules` is the function the players use to see the rules of the game.
 - `getHand` is a function the players use to make their guesses.
 - `seeOutcome` is a function the players use to see the outcome of the game after each round.
-- `informTimeout` is used to implement a timeout if any player decides to delibrately  delay the game.
+- `informTimeout` is used to implement a timeout if any player decides to deliberately delay the game.
 - `informNewRound` is used to signify a new round.
 
 ```js
@@ -213,10 +213,9 @@ const Player = {
 
 };
 ```
-The snippet below is used to signify House, Alice and Bob interfaces including their individual abilites.  
-We initalize the reach application with the `init()`.  
-  
-The reason why this is a casino edition is because, instead of having just 2 participants in the game, we have 3 in which one is the House aka Organizer and the role of the House is to spectate the game, set the rules and also collect the wagers if none of them win.   
+The snippet below is used to signify House, Alice, and Bob interfaces, including their abilities. We initialize the reach application with the `init()`.
+   
+The reason why this is a casino edition is that, instead of having just 2 participants, we have 3 participants where one is the House aka Organizer, and the role of the House is to spectate the game, set the rules, and also collect the wagers if none of them win. 
   
 ```js
 export const main = Reach.App(() => {
@@ -247,7 +246,7 @@ const House = Participant('House', {
   init();
 
 ```
-- Here the `House` interacts with his functions hereby setting all the parameters of the  game then deploys the contract and waits for the players to attach.  
+- Here, the `House` interacts with its functions, hereby setting all the parameters of the game, then deploys the contract and waits for the players to attach it.  
   
 ```js
 const informTimeout = () => {
@@ -268,7 +267,7 @@ const informTimeout = () => {
 
   House.interact.waitingForAttacher();
 ```
-- Here Alice accepts the rules of the game by interacting with the seeRules function and depending on her response the game will continue or  end, she is also prompted to accept the wager then she publishes her response to the blockchain and pays the wager into the contract and the same goes for Bob.  
+- Here, Alice accepts the rules of the game by interacting with the seeRules function and, depending on her response, the game will continue or end. She is also prompted to accept the wager, then she publishes her response to the blockchain and pays the wager into the contract and the same goes for Bob.    
   
 ```js
  Alice.only(() => {
@@ -290,11 +289,11 @@ const informTimeout = () => {
   .pay(wager)
     .timeout(relativeTime(deadline), () => closeTo(Alice, informTimeout));
 ```
-Once all the players have accepted the wagers and have paid in the wagers the next step is the start of the game.  
-- A while loop is used to implement the feature of the game looping for the amount of trials set by the house and also until either of the players guess the right number.  
-- In reach we must use a var to represent mutable values i.e values that can change.  
-- A while loop in reach is not complete without its invariant. An invariant is a statement that must be true before , during and after the while loop, it is  necessary for reach programs during the verification process.  
-- In this while loop, Alice interacts with her `getHand` fuction inputing her guess then Bob does the same then their guesses are been assigned to a var at the end of the loop, these mutable variables are used in the conditions of the while loop to  know if theres a winner.  
+Once all the players have accepted the wagers and have paid for the wagers, the next step is the start of the game.  
+- A while loop is used to implement the feature of the game: looping for the number of trials set by the house and also until either of the players guesses the right number.  
+- In reach, we must use a var to represent mutable values i.e values that can change.  
+- A while loop in Reach is not complete without its invariant. An invariant is a statement that must be true before, during, and after the while loop. It is necessary for Reach programs during the verification process.  
+- In this whole loop, Alice interacts with her getHand function, inputting her guess, then Bob does the same. Their guesses are assigned to a var at the end of the loop. These mutable variables are used in the conditions of the while loop to know if there's a winner.  
   
 ```js
 //While loop that loops as long as  the conditions are not met
@@ -339,8 +338,8 @@ Once all the players have accepted the wagers and have paid in the wagers the ne
 
   }
 ```
-When any of the conditions of the while loop are met the loop ends and an outcome is generated by passing the right arguments into the winner function. The  output of the winner function is passed into an outcome immutable variable aka const and it is then passed into the House `seeOutcome` interact so the House also gets to see the outcome.  
-- Finally to disburse the wager and empty the contract according to the outcome of the game, the `payWinner` function is used to implement this feature and display the outcome to both Alice and Bob.   
+When any of the conditions of the while loop are met, the loop ends and an outcome is generated by passing the right arguments into the winner function. The  output of the winner function is passed into an outcome immutable variable aka const and it is then passed into the House `seeOutcome` interact so the House also gets to see the outcome.  
+- Finally, to disburse the wager and empty the contract according to the outcome of the game, the `payWinner` function is used to implement this feature and display the outcome to both Alice and Bob.   
   
 ```js
   //Using the winner function with arguments of the users inputs and the random number to get the winner
@@ -354,9 +353,9 @@ When any of the conditions of the while loop are met the loop ends and an outcom
 
 });
 ```
-While building with reach it is important to track the flow of the money and ensure the contract is empty at the end of the contract to aviod a `balance sufficent for  transfer `  error leading to faliures in the verification process.  
+While building with Reach, it is important to track the flow of money and ensure the contract is empty at the end of the contract to avoid a `balance sufficient for transfer` errors leading to failures in the verification process.
   
-Below is the full index.rsh code for your perusual.  
+Below is the full index.rsh code for your perusal.  
 ```js
 "reach 0.1";
 //Outcome array
@@ -530,9 +529,8 @@ const House = Participant('House', {
 
 });
 ```
-# Conclusion  
+# Conclusion   
     
-If you followed this workshop from the beginning to this point, congratulations on building a random number guessing game with a wager using Reach!   
-You can decide to level up your game and write your own guessing game smart contract with extra features, or, you can decide to build a GUI for this smart contract and add it to your portfolio. This would be a great way to start as a web3 developer.   
-    
-For more details on how to build out the GUI for this smart contract you can check out the github [repo](https://github.com/yoru01/The-Price-Is-Right-Casino-Edition).  
+If you followed this workshop from the beginning to this point, congratulations on building a random number guessing game with a wager using Reach! You can decide to level up your game and write your guessing game smart contract with extra features, or, you can decide to build a GUI for this smart contract and add it to your portfolio. This would be a great way to start as a web3 developer.
+  
+For more details on how to build out the GUI for this smart contract, you can check out the GitHub [repo](https://github.com/yoru01/The-Price-Is-Right-Casino-Edition).  
